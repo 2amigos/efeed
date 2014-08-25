@@ -183,6 +183,7 @@ class EFeed extends CComponent{
 	public function setLink($link)
 	{
 		$validator = new CUrlValidator();
+		$validator->pattern = '/^{schemes}:\/\/(localhost|([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i'; // include localhost
 		if(!$validator->validateValue($link))
 			throw new CException( Yii::t('EFeed', $link. ' does not seem to be a valid URL') );
 			
@@ -212,6 +213,7 @@ class EFeed extends CComponent{
 	public function setImage($title, $link, $url)
 	{
 		$validator = new CUrlValidator();
+		$validator->pattern = '/^{schemes}:\/\/(localhost|([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i'; // include localhost
 		if(!$validator->validateValue($link))
 			throw new CException( Yii::t('EFeed', $link. ' does not seem to be a valid URL') );
 			
@@ -414,11 +416,10 @@ class EFeed extends CComponent{
 	 */
 	private function renderItems()
 	{    
-		if(null === $this->feedElements->itemAt('items'))
-			throw new CException( Yii::t('EFeed', 'No feed items configured') );
-			
-		foreach ($this->feedElements->itemAt('items') as $item)
-			echo $item->getNode();
+		if($this->feedElements->itemAt('items') !== null) {
+			foreach ($this->feedElements->itemAt('items') as $item)
+				echo $item->getNode();
+		}
 	}
 	/**
 	 * 
