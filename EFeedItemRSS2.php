@@ -73,13 +73,12 @@ class EFeedItemRSS2 extends EFeedItemAbstract{
 		if(in_array($tag->name,$this->CDATAEncoded))
 		{
 			$element .= CHtml::openTag($tag->name,$tag->attributes);
-			$element .= '<![CDATA[';
+			$element .= '<![CDATA['.PHP_EOL;
 			
 		}else 
 		{
 			$element .= CHtml::openTag($tag->name,$tag->attributes);
 		}
-		$element .= PHP_EOL;
 		
 		if(is_array($tag->content))
 		{ 
