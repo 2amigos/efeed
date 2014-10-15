@@ -87,9 +87,9 @@ class EFeedItemRSS1 extends EFeedItemAbstract{
 		
 		if(is_array($tag->content))
 		{ 
-			foreach ($tag->content as $tag => $content) 
+			foreach ($tag->content as $tagName => $content) 
 			{
-				$tmpTag = new EFeedTag($tag, $content);
+				$tmpTag = new EFeedTag($tagName, $content);
 				
 				$element .= $this->getElement( $tmpTag );
 			}
